@@ -61,6 +61,28 @@
             white-space: nowrap;
             vertical-align: baseline;
         }
+        
+        .video-container {
+            margin-top: 50px;
+            margin-bottom: 50px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .video-section {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+        
+        .video-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #872a09;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 
@@ -72,9 +94,9 @@
                 VHS Estimation</h3>
 
             <div class="mb-4" style="margin-bottom: 40px;">
-                <a href="https://github.com/gen-ai-research/dog-vhs" target="_blank">Source Code</a>
+                <a href="https://github.com/gen-ai-research/dog-vhs" target="_blank" class="btn btn-primary me-2">Source Code</a>
                 <a href="https://huggingface.co/datasets/gen-ai-researcher/vhs_dogheart_db"
-                    target="_blank">Dataset</a>
+                    target="_blank" class="btn btn-primary">Dataset</a>
             </div>
             <div class="content-text">
                 <h2 class="section-title">Canine Cardiac Keypoint (CCK) Dataset</h2>
@@ -118,9 +140,30 @@ pip install -r requirements.txt</code></pre>
                 <h3>Training</h3>
                 <pre><code>python model.py</code></pre>
             </div>
+            
+            <!-- New Video Section -->
+            <div class="video-section">
+                <h2 class="video-title">Demo Video</h2>
+                <p>Watch this demonstration video to see VHSMarker in action:</p>
+                
+                <div class="ratio ratio-16x9 video-container">
+                    <video controls poster="/static/assets/img/video-poster.jpg">
+                        <source src="/static/assets/video/vhsmarker-demo.webm" type="video/webm">
+                        <source src="/static/assets/video/vhsmarker-demo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                
+                <div class="mt-3">
+                    <a href="/static/assets/video/vhsmarker-demo.webm" download class="btn btn-primary">
+                        <i class="fas fa-download me-2"></i>Download Demo Video (WEBM)
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/assets/vendor/fontawesome/js/all.min.js"></script>
 </body>
 
 </html>
