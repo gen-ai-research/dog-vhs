@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duplicate Image Checker</title>
+
+    <!-- Bootstrap & Custom Styles -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="/static/assets/vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet" />
+    <link href="/static/assets/vendor/fontawesome/css/solid.min.css" rel="stylesheet" />
+    <link href="/static/assets/vendor/fontawesome/css/brands.min.css" rel="stylesheet" />
+    <link href="/static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/assets/css/master.css" rel="stylesheet" />
+
+    <script src="/static/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        let currentIndex = 0;
+        let totalImages = 0;
+
+        function loadImagesByIndex(index) {
+            fetch(`/get_images/${index}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert("No more images to review.");
+                        return;
+                    }
+
+                    updateImageDisplay(data.original, data.duplicate, index, data.total);
+                })
+                .catch(error => console.error("Error loading images:", error));
+        }
+
+        function loadImagesByName(imageName) {
+            fetch(`/get_images_by_name/${imageName}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert("Image not found.");
+                        return;
+                    }
+
+                    updateImageDisplay(data.original, data.duplicate, data.index, data.total);
+                })
+                .catch(error => console.error("Error loading image by name:", error));
+        }
+
+        function updateImageDisplay(original, duplicate, index, total) {
+            document.getElementById("original-img").src = `/images/${original}`;
+            document.getElementById("duplicate-img").src = `/images/${duplicate}`;
+            document.getElementById("original-name").innerText = original;
+            document.getElementById("duplicate-name").innerText = duplicate;
+            document.getElementById("index-display").innerText = `Image ${index + 1} of ${total}`;
+            document.getElementById("manual-index").value = original;
+            currentIndex = index;
+            totalImages = total;
+        }
+
+        function nextImage() {
+            if (currentIndex < totalImages - 1) {
+                loadImagesByIndex(currentIndex + 1);
+            }
+        }
+
+        function prevImage() {
+            if (currentIndex > 0) {
+                loadImagesByIndex(currentIndex - 1);
+            }
+        }
+
+        function goToImage() {
+            let imageName = document.getElementById("manual-index").value.trim();
+            if (imageName) {
+                loadImagesByName(imageName);
+            } else {
+                alert("Please enter a valid image name.");
+            }
+        }
+
+        function markAsDuplicate() {
+            let duplicateImg = document.getElementById("duplicate-img").src.split("/").pop();
+            
+            fetch("/mark_duplicate", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ duplicate: duplicateImg })
+            })
+            .then(response => response.json())
+            .then(data => {
+                //alert(data.message || data.error);
+                nextImage();
+            })
+            .catch(error => console.error("Error moving duplicate:", error));
+        }
+
+        window.onload = () => loadImagesByIndex(0);
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Trigger search when Enter is pressed
+            document.getElementById("manual-index").addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    goToImage();
+                }
+            });
+
+            // Handle keyboard shortcuts
+            document.addEventListener("keydown", function(event) {
+                if (event.key === "ArrowRight") {
+                    nextImage(); // Right arrow -> Next image
+                } else if (event.key === "ArrowLeft") {
+                    prevImage(); // Left arrow -> Previous image
+                } else if (event.key === "Delete") {
+                    markAsIncorrect(); // Delete key -> Mark as Incorrect
+                }
+            });
+        });
+
+
+        function markAsIncorrect() {
+            let duplicateImg = document.getElementById("duplicate-img").src.split("/").pop();
+            let originalImg = document.getElementById("original-img").src.split("/").pop();
+
+            fetch("/mark_incorrect", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ duplicate: duplicateImg, original: originalImg })
+            })
+            .then(response => response.json())
+            .then(data => {
+                //alert(data.message || data.error);
+                nextImage();
+            })
+            .catch(error => console.error("Error moving images to incorrect:", error));
+        }
+
+        function deleteImage(type) {
+            let imageName = type === "original"
+                ? document.getElementById("original-img").src.split("/").pop()
+                : document.getElementById("duplicate-img").src.split("/").pop();
+
+            fetch("/delete_image", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ image: imageName })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    //alert(`${imageName} deleted successfully!`);
+                    nextImage(); // Move to next image after deletion
+                } else {
+                    alert(data.error || "Error deleting image.");
+                }
+            })
+            .catch(error => console.error("Error deleting image:", error));
+        }
+
+
+    </script>
+
+    <style>
+        .fixed-img {
+            width: 500px;
+            height: 500px;
+            object-fit: contain; /* Maintains aspect ratio within the fixed dimensions */
+            border: 2px solid black;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column align-items-center justify-content-center vh-100 bg-light">
+
+    <div class="container text-center">
+        <h2 class="mb-4 text-warning">Duplicate Image Review</h2>
+        <p id="index-display" class="lead">Loading...</p>
+
+        <div class="row justify-content-center">
+            <!-- Original Image -->
+            <div class="col-md-5 text-center">
+                <img id="original-img" src="" alt="Original Image" class="fixed-img">
+                <p id="original-name" class="mt-2 text-muted"></p>
+                <button class="btn btn-outline-danger mt-2" onclick="deleteImage('original')">Delete Original</button>
+            </div>
+            
+            <!-- Duplicate Image -->
+            <div class="col-md-5 text-center">
+                <img id="duplicate-img" src="" alt="Duplicate Image" class="fixed-img">
+                <p id="duplicate-name" class="mt-2 text-muted"></p>
+                <button class="btn btn-outline-danger mt-2" onclick="deleteImage('duplicate')">Delete Duplicate</button>
+            </div>
+        </div>
+        
+
+        <div class="btn-container mt-4">
+            <button class="btn btn-secondary" onclick="prevImage()">⬅️ Previous</button>
+            <button class="btn btn-primary" onclick="nextImage()">Next ➡️</button>
+        </div>
+
+        <div class="mt-3">
+            <label class="form-label">Go to Image Name: </label>
+            <div class="input-group justify-content-center">
+                <input type="text" id="manual-index" class="form-control w-50 text-center" placeholder="Enter image name (e.g., 6912.png)">
+                <button class="btn btn-outline-primary" onclick="goToImage()">Go</button>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <button class="btn btn-danger mt-2" onclick="markAsDuplicate()">Mark as Duplicate</button>
+            <button class="btn btn-warning mt-2" onclick="markAsIncorrect()">Mark as Incorrect</button>
+        </div>
+    </div>
+
+</body>
+</html>

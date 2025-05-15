@@ -1,98 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VetMark and MambaVHS - Canine Cardiac Keypoint Detection</title>
-    <meta name="description" content="VetMark and MambaVHS: A comprehensive framework for high-quality canine cardiac analysis, including real-time VHS calculation, keypoint detection, and Dog Cardiomegaly diagnosis.">
-    <meta name="keywords" content="Dog Cardiomegaly, VetMark, MambaVHS, Canine Cardiac Keypoint Detection, VHS Prediction, Veterinary Cardiology, Dog Heart X-ray, Deep Learning, Keypoint Annotation">
-    <meta name="author" content="Namrataben Patel">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>VHSMarker: A High-Precision Annotation Tool for Canine Cardiac Keypoint Detection and VHS Estimation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/assets/vendor/fontawesome/css/fontawesome.min.css" rel="stylesheet">
+    <link href="/static/assets/vendor/fontawesome/css/solid.min.css" rel="stylesheet">
+    <link href="/static/assets/vendor/fontawesome/css/brands.min.css" rel="stylesheet">
+    <link href="/static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/assets/css/master.css" rel="stylesheet">
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-            color: #333;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
         }
-        .container {
-            max-width: 900px;
-            margin: 40px auto;
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #2c3e50;
-            font-size: 2.5em;
+
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #343a40;
             margin-bottom: 20px;
         }
-        h2 {
-            color: #2c3e50;
-            font-size: 1.8em;
-            margin-bottom: 15px;
-        }
-        p {
-            font-size: 1.2em;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .footer {
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #495057;
             margin-top: 40px;
-            font-size: 0.9em;
-            color: #777;
-            text-align: center;
-        }
-        ul {
             margin-bottom: 20px;
-            padding-left: 20px;
+        }
+
+        .content-text {
+            font-size: 1.1rem;
+            color: #495057;
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .custom-green-label {
+            background-color: #28a745;
+            color: white;
+            padding: 0.3em 0.6em;
+            border-radius: 0.25em;
+            font-size: 100%;
+            font-weight: 700;
+            line-height: 2;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <h1>VetMark and MambaVHS - Canine Cardiac Keypoint Detection</h1>
-        
-        <p>Dog Cardiomegaly is a serious medical condition characterized by an enlarged heart, which can significantly impact a dog's health and quality of life. Early and accurate detection of cardiomegaly is crucial for effective treatment and management. The vertebral heart score (VHS) is a widely used metric for assessing heart size in dogs from thoracic X-rays.</p>
+        <div class="mt-5 text-start">
+            <h1 class="header-title" style="color:#872a09">VHSMarker</h1>
+            <h3 style="margin-bottom: 20px;">A High-Precision Annotation Tool for Canine Cardiac Keypoint Detection and
+                VHS Estimation</h3>
 
-        <h2>VetMark - Advanced Annotation for Cardiac Analysis</h2>
-        <p>We present <strong>VetMark</strong>, a web-based annotation tool designed to streamline the creation of high-quality ground truth data for canine cardiac analysis. VetMark provides an intuitive interface for precise labeling of six critical cardiac keypoints in dog heart X-ray images, significantly reducing annotation time and improving consistency. It also supports:</p>
-        
-        <ul>
-            <li>Real-time vertebral heart score (VHS) calculation as points are placed.</li>
-            <li>Predictions using pretrained models for rapid evaluation.</li>
-            <li>Side-by-side comparison of ground truth and model predictions for performance analysis.</li>
-        </ul>
-        
-        <h2>Canine Cardiac Keypoint (CCK) Dataset</h2>
-        <p>The CCK Dataset is a meticulously curated collection of annotated dog heart X-rays specifically designed for accurate VHS prediction and keypoint localization. This dataset is an essential resource for developing robust diagnostic tools for veterinary cardiology, including early detection of Dog Cardiomegaly.</p>
+            <div class="mb-4" style="margin-bottom: 40px;">
+                <a href="https://github.com/gen-ai-research/dog-vhs" target="_blank">Source Code</a>
+                <a href="https://drive.google.com/drive/folders/1Ry-pTgbOfpOEN8ZCbqnAKW5SP5kcOjji?usp=sharing"
+                    target="_blank">Dataset</a>
+            </div>
+            <div class="content-text">
+                <h2 class="section-title">Canine Cardiac Keypoint (CCK) Dataset</h2>
+                <p>The CCK dataset is a meticulously curated collection of 21,465 annotated canine thoracic radiographs,
+                    capturing a diverse range of anatomical variations and clinical conditions. This high-quality
+                    dataset provides a robust foundation for training deep learning models for vertebral heart score
+                    (VHS) estimation. It is designed to improve the accuracy and generalizability of machine learning
+                    models by offering comprehensive anatomical coverage. The dataset is available for download with
+                    detailed documentation on data structure, annotation protocols, and usage guidelines.</p>
+                <h3>Installation and Setup</h3>
+                Download the Dataset from the given link and extract it into <code>static</code> folder for VHSMarker
+                Annotation Tool.
+                Download the Dataset from the given link and extract it into <code>data</code> folder for MambaVHS
+                Model.
 
-        <h2>MambaVHS - Advanced Keypoint Detection Model</h2>
-        <p>MambaVHS is a custom deep learning model that integrates Mamba blocks for efficient long-range sequence modeling alongside complementary convolutional components for precise spatial feature extraction. It is designed to surpass existing baselines in canine cardiac keypoint detection, enabling accurate VHS estimation for early cardiomegaly diagnosis.</p>
 
-        <h2>Features and Benefits</h2>
-        <ul>
-            <li>Accurate keypoint detection and VHS estimation for Dog Cardiomegaly assessment.</li>
-            <li>Real-time feedback during annotation.</li>
-            <li>Model predictions compared with ground truth for validation.</li>
-            <li>Open-source tools and pretrained models for community use.</li>
-        </ul>
-
-        <h2>Explore the Project</h2>
-        <p>For more details, visit our project on GitHub: <a href="https://github.com/gen-ai-research/dog-vhs">MambaVHS Project Page</a></p>
-        
-        <!-- <div class="footer"> -->
-            <!-- &copy; 2025 Namrataben Patel | All rights reserved. -->
-        <!-- </div> -->
+                <h2 class="section-title">VHSMarker Tool</h2>
+                <p>VHSMarker is a web-based human-computer interaction annotation tool that streamlines the creation of
+                    high-quality ground truth data for canine cardiac analysis. It provides an intuitive interface for
+                    precise labeling of six critical cardiac keypoints in dog heart X-ray images, significantly reducing
+                    annotation time and improving consistency. The tool supports real-time VHS calculation, side-by-side
+                    comparison of ground truth and model predictions, and automated data export for efficient model
+                    training.</p>
+                <h3>Installation and Setup</h3>
+                <pre><code>cd vhs_marker_tool
+npm install
+</code></pre>
+                <h3>Running</h3>
+                <pre><code>python app.py</code></pre>
+                <h2 class="section-title">MambaVHS Model</h2>
+                <p>MambaVHS (Mamba-Enhanced Vertebral Heart Score Detection) is a custom deep learning model that
+                    integrates Mamba blocks for efficient long-range sequence modeling alongside complementary
+                    convolutional components for precise spatial feature extraction. It is specifically designed to
+                    capture both local anatomical features and global contextual information, making it particularly
+                    effective for complex veterinary diagnostics. The model's architecture is optimized for accurate VHS
+                    prediction with minimal latency, providing a scalable solution for real-world veterinary
+                    applications.</p>
+                <h3>Installation and Setup</h3>
+                <pre><code>cd mamba_vhs/models
+pip install -r requirements.txt</code></pre>
+                <h3>Training</h3>
+                <pre><code>python model.py</code></pre>
+            </div>
+        </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

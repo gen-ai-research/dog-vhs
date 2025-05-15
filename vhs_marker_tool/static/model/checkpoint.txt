@@ -1,0 +1,2 @@
+Download the checkpoint "bm_15.pth" from:
+https://drive.google.com/drive/u/7/folders/1LRM2lbTu41M9yCTxIoZbgYiQ-fugCQgV

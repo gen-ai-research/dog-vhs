@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POC for lines on image</title>
+    <style>
+        .toolbar {
+            margin-bottom: 10px;
+        }
+        #paintCanvas {
+            border: 1px solid #000000;
+        }
+    </style>
+</head>
+<body>
+    <h1>POC for the lines on the Dog Heart X Ray Image</h1>
+    <p>Print the coordinates after the lines are placed.</p>
+    <div>
+        <div class="toolbar">
+            <button id="longBtn">Long</button>
+            <button id="shortBtn">Short</button>
+            <button id="verteBtn">Verte</button>
+            <button id="drawLine">Draw Line</button>
+            <button id="clearCanvas">Clear Canvas</button>
+            <button id="saveCoordinates">Save Coordinates</button>
+            <button id="printCoordinates">Print Coordinates</button>
+        </div>
+        <br/>
+        <table>
+            <tr>
+                <td><canvas id="paintCanvas" width="800" height="600"></canvas></td>
+                <td><label id="coordinatesLabel">Coordinates: </label></td>
+            </tr>
+        </table>
+        
+        <br/>
+        
+    </div>
+    <script src="{{ url_for('static', filename='canvas_script.js') }}"></script>
+</body>
+</html>
