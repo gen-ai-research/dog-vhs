@@ -1,6 +1,6 @@
 # VHSMarker: A High-Precision Annotation Tool for Canine Cardiac Keypoint Detection and VHS Estimation
 
-![Project Banner](static/assets/img/banner.png) <!-- Add your banner image if available -->
+<!-- ![Project Banner](static/assets/img/banner.png) <!-- Add your banner image if available 
 
 ## Table of Contents
 - [Overview](#overview)
@@ -21,6 +21,8 @@
 - [Citation](#citation)
 - [License](#license)
 - [Contact](#contact)
+
+-->
 
 ## Overview
 
