@@ -1,0 +1,56 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "sc": "https://schema.org/",
+    "cr": "http://mlcommons.org/croissant/1.0/"
+  },
+  "@type": "Dataset",
+  "name": "VHSMarker_Canine_Cardiac_Keypoint_CCK_Dataset",
+  "alternateName": "CCK Dataset",
+  "description": "The CCK dataset is a meticulously curated collection of 21,465 annotated canine thoracic radiographs, capturing a diverse range of anatomical variations and clinical conditions. It is designed to improve the accuracy and generalizability of machine learning models for vertebral heart score (VHS) estimation.",
+  "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+  "url": "https://huggingface.co/datasets/gen-ai-researcher/vhs_dogheart_db",
+   "citation": "Veterinary AI Research Group. (2025). VHSMarker Canine Cardiac Keypoint Dataset [Unpublished dataset]. Available: https://huggingface.co/datasets/gen-ai-researcher/vhs_dogheart_db",
+  "datePublished": "2025-05-15",
+  "version": "1.0.0",
+  "distribution": [
+    {
+      "@type": "FileObject",
+      "name": "Train.tar",
+      "contentUrl": "https://huggingface.co/datasets/gen-ai-researcher/vhs_dogheart_db",
+      "encodingFormat": "application/x-tar",
+      "sha256": "cf17351a366bcc7a70056c2a7f9342863703f6e64acaeb461d2bbeae610f39b4"
+    },
+    {
+      "@type": "FileObject",
+      "name": "Valid.tar",
+      "contentUrl": "https://huggingface.co/datasets/gen-ai-researcher/vhs_dogheart_db",
+      "encodingFormat": "application/x-tar",
+      "sha256": "7b0858c1793378f70c7fd3fffe66916db122f3fb277cdea3b0c5f430009a8920"
+    },
+    {
+      "@type": "FileObject",
+      "name": "Test_Images.tar",
+      "contentUrl": "https://huggingface.co/datasets/gen-ai-researcher/vhs_dogheart_db",
+      "encodingFormat": "application/x-tar",
+      "sha256": "66d058c322d611f7e83b7f9c0a071eeec40c2455a83ca4d7b2434da4308e153b"
+    }
+  ],
+  "hasPart": [
+    {
+      "@type": "Dataset",
+      "name": "Train_Set",
+      "description": "Training set of canine cardiac X-ray images and their corresponding .mat labels."
+    },
+    {
+      "@type": "Dataset",
+      "name": "Validation_Set",
+      "description": "Validation set of canine cardiac X-ray images and their corresponding .mat labels."
+    },
+    {
+      "@type": "Dataset",
+      "name": "Test_Set",
+      "description": "Test set of canine cardiac X-ray images and their corresponding .mat labels."
+    }
+  ]
+}
