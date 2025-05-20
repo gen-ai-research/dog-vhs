@@ -175,21 +175,19 @@
             <div class="row">
                 <div class="col-lg-12 text-left">
                     <h2 class="section-title">Abstract</h2>
-                    <p>We present VHSMarker, a web-based human computer interaction annotation 1
-                        tool designed to streamline the creation of high-quality ground truth data for 2
-                        canine cardiac analysis. VHSMarker provides an intuitive interface for precise 3
-                        labeling of six critical cardiac key points in dog heart X-ray images, significantly 4
-                        reducing annotation time and improving consistency. It also supports real-time 5
-                        vertebral heart score (VHS) calculation as points are placed, enables predictions 6
-                        using pretrained models, and allows side-by-side comparison of ground truth 7
-                        and model predictions for performance evaluation. In addition, we introduce 8
-                        a canine cardiac key point (CCK) dataset, a meticulously curated collection of 9
-                        annotated 21,465 X-ray images for accurate VHS prediction. To facilitate the 10
-                        labeling, we developed MambaVHS (Mamba-Enhanced Vertebral Heart Score 11
-                        Detection), a custom model that integrates Mamba blocks for efficient long-range 12
-                        sequence modeling alongside complementary convolutional components for precise 13
-                        spatial feature extraction. Together, this comprehensive framework sets a new 14
-                        benchmark for canine cardiology research.</p>
+                    <p>We present VHSMarker, a web-based human computer interaction annotation tool designed to
+                        streamline the creation of high-quality ground truth data for canine cardiac analysis. VHSMarker
+                        provides an intuitive interface for precise labeling of six critical cardiac key points in dog
+                        heart X-ray images, significantly reducing annotation time and improving consistency. It also
+                        supports real-time vertebral heart score (VHS) calculation as points are placed, enables
+                        predictions using pretrained models, and allows side-by-side comparison of ground truth and
+                        model predictions for performance evaluation. In addition, we introduce a canine cardiac key
+                        point (CCK) dataset, a meticulously curated collection of annotated 21,465 X-ray images for
+                        accurate VHS prediction. To facilitate the labeling, we developed MambaVHS (Mamba-Enhanced
+                        Vertebral Heart Score Detection), a custom model that integrates Mamba blocks for efficient
+                        long-range sequence modeling alongside complementary convolutional components for precise
+                        spatial feature extraction. Together, this comprehensive framework sets a new benchmark for
+                        canine cardiology research. </p>
                 </div>
             </div>
         </div>
@@ -345,39 +343,70 @@
     <!-- Video Demo Section -->
     <section class="py-5 bg-white">
         <div class="container">
-            <h2 class="section-title text-left">VHSMarker</h2>
-            <p>VHSMarker is a web-based human-computer interaction annotation tool designed to streamline the
-                creation of high-quality ground truth data for canine cardiac analysis. It provides an intuitive
-                interface for precise labeling of six critical cardiac key points in dog heart X-ray images,
-                significantly reducing annotation time and improving consistency.</p>
+            <h2 class="section-title text-left">VHSMarker Annotation Tool</h2>
+            <p class="lead">A specialized web-based platform for precise canine cardiac analysis, combining clinical
+                expertise with advanced computer vision capabilities.</p>
+
             <div class="feature-box">
-                <h4><i class="fas fa-check-circle text-success me-2"></i>Tool Features</h4>
-                <ul>
-                    <li>Intuitive human-computer interface for easy annotation</li>
-                    <li>Real-time vertebral heart score (VHS) calculation</li>
-                    <li>Automated data export in multiple formats</li>
-                </ul>
-
-                <h4 class="text-left">Video Demonstration</h4>
-
-
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="ratio ratio-16x9 video-container shadow rounded overflow-hidden">
-                            <video width="640" height="360" controls>
-                                <source src="assets/VHS.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
+                <!-- Tech Stack -->
+                <div class="mb-4">
+                    <h4><i class="fas fa-layer-group text-primary me-2"></i>Technical Architecture</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="fa-ul">
+                                <li><span class="fa-li"><i
+                                            class="fas fa-server text-info"></i></span><strong>Backend:</strong> Flask
+                                    (Python) with OpenCV for image processing</li>
+                                <li><span class="fa-li"><i
+                                            class="fas fa-window-maximize text-info"></i></span><strong>Frontend:</strong>
+                                    HTML5 Canvas + JavaScript for responsive annotation</li>
+                                <li><span class="fa-li"><i
+                                            class="fas fa-network-wired text-info"></i></span><strong>Real-time
+                                        API:</strong> Real-Time communication for instant VHS calculation</li>
+                            </ul>
                         </div>
-
-                        <div class="text-center mt-3">
-                            <a href="assets/VHS.mp4" download class="btn btn-outline-primary">
-                                <i class="fas fa-download me-2"></i>Download Video
-                            </a>
+                        <div class="col-md-6">
+                            <ul class="fa-ul">
+                                <!-- <li><span class="fa-li"><i class="fas fa-database text-info"></i></span><strong>Data
+                                        Pipeline:</strong> DICOM/JPEG support with EXIF metadata extraction</li> -->
+                                <li><span class="fa-li"><i class="fas fa-cogs text-info"></i></span><strong>ML
+                                        Integration:</strong> ONNX runtime for model inference</li>
+                                <li><span class="fa-li"><i
+                                            class="fas fa-history text-info"></i></span><strong>Versioning:</strong>
+                                    Git-like annotation history tracking</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
+
+                <!-- Core Features -->
+                <p class="lead mb-4">
+                    VHSMarker revolutionizes canine cardiac analysis through three core innovations: <strong>Smart
+                        Annotation</strong> enables precise labeling of six anatomical keypoints (cardiac apex, tracheal
+                    bifurcation, and vertebral reference points) with pixel-level accuracy; <strong>Real-Time
+                        Analysis</strong> instantly computes the Vertebral Heart Score using the formula
+                    <code>VHS = 6 × (AB + CD)/EF</code>, where AB is the long axis (cardiac apex to tracheal
+                    bifurcation), CD is the short axis (perpendicular width), and EF is the vertebral reference length;
+                    <!-- and <strong>Clinical Workflow</strong> integration featuring DICOM metadata processing and secure
+                    data export.  -->
+                    The tool's hybrid web architecture combines Flask backend processing with HTML5 Canvas frontend interactivity, delivering 10-12 second annotation times while maintaining sub-pixel precision in measurements.
+                </p>
+                <!-- Video Demo -->
+                <h4 class="mt-4"><i class="fas fa-play-circle text-danger me-2"></i>Tool Demonstration</h4>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10"> <!-- Increased width for better visibility -->
+                        <div class="ratio ratio-16x9 video-container shadow-lg rounded overflow-hidden">
+                            <video controls>
+                                <source src="assets/VHS.mp4" type="video/mp4">
+                                Your browser does not support HTML5 video.
+                            </video>
+                        </div>
+                        <p class="text-muted small mt-2">Demonstrating: Keypoint placement (A-F), real-time VHS
+                            calculation, and model prediction comparison</p>
+                    </div>
+                </div>
             </div>
+        </div>
     </section>
     <!-- MambaVHS Model Section-->
     <section>
@@ -612,18 +641,20 @@
         </div>
     </section>
 
-<!-- Conclusion Section -->
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-lg-8 mx-auto">
-            <p class="lead text-center">
-                The VHSMarker framework advances canine cardiac analysis through its efficient annotation tool (10-12s/image), 
-                comprehensive CCK dataset (21,465 images), and high-accuracy MambaVHS model (91.8% test accuracy, 42ms inference), 
-                establishing a new benchmark for automated veterinary diagnostics.
-            </p>
+    <!-- Conclusion Section -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <p class="lead text-center">
+                    The VHSMarker framework advances canine cardiac analysis through its efficient annotation tool
+                    (10-12s/image),
+                    comprehensive CCK dataset (21,465 images), and high-accuracy MambaVHS model (91.8% test accuracy,
+                    42ms inference),
+                    establishing a new benchmark for automated veterinary diagnostics.
+                </p>
+            </div>
         </div>
     </div>
-</div>
     <!-- Citation Section -->
     <!-- <section class="py-5">
         <div class="container">
