@@ -1,63 +1,21 @@
 import os
-# os.environ["CUDA_VISIBLE_DEVICES"] = "3" 
-
-import random
-import logging
-import numpy as np
-import pandas as pd
-from tqdm import tqdm
-from PIL import Image
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-from scipy.io import loadmat, savemat
-
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
-from torch.utils.data import Dataset, DataLoader, ConcatDataset
-from torch.nn import L1Loss, CrossEntropyLoss
-from torch.cuda.amp import GradScaler, autocast
-
-import torchvision
-import torchvision.transforms as T
-import torchvision.models as models
-from collections import Counter
-from torchvision import models
-import os
-import sys
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
-
-import torch.nn.functional as F
 from mamba_ssm.ops.selective_scan_interface import selective_scan_fn
-from einops import rearrange
 
-sys.path.append(os.path.join(os.path.dirname(__file__), 'mamba'))
-
-
-SEED = 42
-random.seed(SEED)
-np.random.seed(SEED)
-torch.manual_seed(SEED)
-torch.cuda.manual_seed_all(SEED)
-torch.backends.cudnn.deterministic = True
-torch.backends.cudnn.benchmark = False
-
-
-#################### START : MODEL
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 # =========================
 # Mamba Custom Model
 # =========================
 
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-from mamba_ssm.ops.selective_scan_interface import selective_scan_fn
-from einops import rearrange
-
 class SELayer(nn.Module):
+    """
+    Squeeze-and-Excitation Layer
+    Args:
+        channels (int): Number of input channels.
+        reduction (int): Reduction ratio for the channel dimension. 
+    """ 
     def __init__(self, channels, reduction=16):
         super().__init__()
         self.se = nn.Sequential(
@@ -72,6 +30,11 @@ class SELayer(nn.Module):
         return x * self.se(x)
 
 class ResidualBlock(nn.Module):
+    """
+    Residual Block with Conv2d, BatchNorm2d, and SiLU activation.   
+    Args:
+        dim (int): Number of input channels.
+    """
     def __init__(self, dim):
         super().__init__()
         self.block = nn.Sequential(
@@ -87,6 +50,13 @@ class ResidualBlock(nn.Module):
         return self.act(x + self.block(x))
 
 class MambaBlock(nn.Module):
+    """
+    Mamba Block with selective scan and linear projections.
+    Args:
+        dim (int): Number of input channels.
+        d_state (int): Dimension of the state.  
+        expand (int): Expansion factor for the inner dimension.
+    """ 
     def __init__(self, dim, d_state=16, expand=2):
         super().__init__()
         self.dim = dim
@@ -112,6 +82,12 @@ class MambaBlock(nn.Module):
         return x
 
 class Downsample(nn.Module):
+    """
+    Downsample block with Conv2d, BatchNorm2d, and SiLU activation. 
+    Args:   
+        in_ch (int): Number of input channels.
+        out_ch (int): Number of output channels.
+    """
     def __init__(self, in_ch, out_ch):
         super().__init__()
         self.down = nn.Sequential(
@@ -124,6 +100,12 @@ class Downsample(nn.Module):
         return self.down(x)
 
 class MambaStem(nn.Module):
+    """
+    Stem block for the Mamba model.
+    Args:
+        in_ch (int): Number of input channels.
+        out_ch (int): Number of output channels.
+    """ 
     def __init__(self, in_ch=3, out_ch=64):
         super().__init__()
         self.conv = nn.Sequential(
@@ -139,6 +121,13 @@ class MambaStem(nn.Module):
         return self.conv(x)
 
 class MambaStage(nn.Module):
+    """ 
+    Mamba Stage block with downsampling and multiple Mamba blocks.
+    Args:   
+        in_ch (int): Number of input channels.
+        out_ch (int): Number of output channels.
+        depth (int): Number of Mamba blocks in the stage.
+    """
     def __init__(self, in_ch, out_ch, depth=2):
         super().__init__()
         self.down = Downsample(in_ch, out_ch)
@@ -152,6 +141,12 @@ class MambaStage(nn.Module):
         return x
 
 class MambaVHS(nn.Module):
+    """
+    MambaVHS model for predicting VHS scores.   
+    Args:
+        in_ch (int): Number of input channels.
+        num_points (int): Number of points for the model.
+    """ 
     def __init__(self, in_ch=3, num_points=12):
         super().__init__()
         self.stem = MambaStem(in_ch, 64)
@@ -176,18 +171,25 @@ class MambaVHS(nn.Module):
         x = self.stage4(x)
         x = self.pool(x)
         return self.regressor(x).view(x.size(0), -1)
-        
+    
 
-# Load EfficientNet model and modify its classifier
-def get_model(device):
-    model = MambaVHS()
-
-    # 2. Load the checkpoint
-    checkpoint_path = '20250506_204657/models/bm_43.pth'
-
-    # 3. Load model state dict
-    model.load_state_dict(torch.load(checkpoint_path, map_location='cpu'))
-
+def get_model(device, num_points=12,checkpoint_path=None):
+    """     
+    Get MambaVHS model with specified number of points.
+    Args:
+        num_points (int): Number of points for the model.
+        checkpoint_path (str): Path to the checkpoint file.
+    Returns:
+        model (MambaVHS): MambaVHS model instance.
+    """
+    model = MambaVHS(num_points=num_points)
+    if checkpoint_path is not None and os.path.exists(checkpoint_path):
+        checkpoint = torch.load(checkpoint_path, map_location=device)
+        model.load_state_dict(checkpoint['model_state_dict'])
+        print(f"Loaded model from {checkpoint_path}")
+    else:
+        print("No checkpoint found, using random initialization.")  
+    
     return model.to(device)
    
 
