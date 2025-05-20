@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VHSMarker: A High-Precision Annotation Tool for Canine Cardiac key point Detection and VHS Estimation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            /* --primary-color: #872a09; */
+            --primary-color: #0366d6;
+            --secondary-color: #1b1c1bc9;
+            --dark-color: #343a40;
+            --light-color: #f8f9fa;
+            --blue-color: #336290;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-color);
+            color: #495057;
+            line-height: 1.5;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            padding: 4rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .header-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--dark-color);
+            margin-bottom: 2rem;
+        }
+
+        .novelty-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+
+        .novelty-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .novelty-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--secondary-color);
+        }
+
+        .feature-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            font-weight: 600;
+            padding: 0.5rem 1.5rem;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .btn-outline-secondary {
+            color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .btn-outline-secondary:hover {
+            background-color: var(--secondary-color);
+            border-color: var((--secondary-color);
+            }
+
+            code {
+                background: #f3f3f3;
+                padding: 0.2rem 0.4rem;
+                border-radius: 4px;
+                font-family: 'Courier New', Courier, monospace;
+            }
+
+            pre {
+                background: #f8f9fa;
+                padding: 1rem;
+                border-radius: 8px;
+                border-left: 4px solid var(--primary-color);
+            }
+
+            .video-container {
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            footer {
+                background-color: var(--dark-color);
+                color: white;
+                padding: 2rem 0;
+                margin-top: 3rem;
+            }
+    </style>
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <h1 class="header-title">VHSMarker</h1>
+                    <h2 class="header-subtitle">A High-Precision Annotation Tool for Canine Cardiac key point Detection
+                        and VHS Estimation</h2>
+                    <div class="mt-4">
+                        <a href="https://github.com/gen-ai-research/dog-vhs" target="_blank"
+                            class="btn btn-outline-secondary me-2">
+                            <i class="fas fa-code me-1"></i> Source Code
+                        </a>
+                        <a href="https://huggingface.co/datasets/gen-ai-researcher/vhs_dogheart_db" target="_blank"
+                            class="btn btn-outline-secondary">
+                            <i class="fas fa-database me-1"></i> Download Dataset
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 d-none d-lg-block">
+                    <img src="assets/resources/imgs/Main Screen.png" alt="VHSMarker Interface"
+                        class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-left">
+                    <h2 class="section-title">Abstract</h2>
+                    <p>We present VHSMarker, a web-based human computer interaction annotation tool designed to
+                        streamline the creation of high-quality ground truth data for canine cardiac analysis. VHSMarker
+                        provides an intuitive interface for precise labeling of six critical cardiac key points in dog
+                        heart X-ray images, significantly reducing annotation time and improving consistency. It also
+                        supports real-time vertebral heart score (VHS) calculation as points are placed, enables
+                        predictions using pretrained models, and allows side-by-side comparison of ground truth and
+                        model predictions for performance evaluation. In addition, we introduce a canine cardiac key
+                        point (CCK) dataset, a meticulously curated collection of annotated 21,465 X-ray images for
+                        accurate VHS prediction. To facilitate the labeling, we developed MambaVHS (Mamba-Enhanced
+                        Vertebral Heart Score Detection), a custom model that integrates Mamba blocks for efficient
+                        long-range sequence modeling alongside complementary convolutional components for precise
+                        spatial feature extraction. Together, this comprehensive framework sets a new benchmark for
+                        canine cardiology research. </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Three Key Novelties -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title text-left">Key Contributions</h2>
+            <div class="row g-4">
+                <!-- Dataset Card -->
+                <div class="col-md-4">
+                    <div class="card novelty-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="novelty-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h3 class="h4">CCK Dataset</h3>
+                            <p class="card-text">21,465 annotated canine thoracic radiographs with comprehensive
+                                anatomical coverage and clinical diversity.</p>
+                            <ul class="text-start ps-3">
+                                <li>Diverse breeds and conditions</li>
+                                <li>Standardized annotations</li>
+                                <li>Rich metadata</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Tool Card -->
+                <div class="col-md-4">
+                    <div class="card novelty-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="novelty-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <h3 class="h4">VHSMarker Tool</h3>
+                            <p class="card-text">Web-based annotation platform for precise labeling of canine cardiac
+                                keypoints with real-time VHS calculation and model comparison capabilities.</p>
+                            <ul class="text-start ps-3">
+                                <li>Intuitive human-computer interface</li>
+                                <li>Six anatomical keypoint labeling</li>
+                                <li>Automated data export</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Model Card -->
+                <div class="col-md-4">
+                    <div class="card novelty-card h-100">
+                        <div class="card-body text-center p-4">
+                            <div class="novelty-icon">
+                                <i class="fas fa-gears"></i>
+                            </div>
+                            <h3 class="h4">MambaVHS Model</h3>
+                            <p class="card-text">Hybrid architecture combining Mamba blocks for sequence modeling with
+                                convolutional networks for spatial feature extraction.</p>
+                            <ul class="text-start ps-3">
+                                <li>State-of-the-art accuracy</li>
+                                <li>Efficient long-range modeling</li>
+                                <li>Real-time inference</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Sections -->
+    <!-- Dataset Section -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2 class="section-title">Canine Cardiac Keypoint (CCK) Dataset</h2>
+                    <p>The CCK dataset is a meticulously curated collection of 21,465 annotated canine thoracic
+                        radiographs, capturing a diverse range of anatomical variations and clinical conditions.</p>
+
+                    <div class="feature-box">
+                        <h4><i class="fas fa-check-circle text-success me-2"></i>Dataset Features</h4>
+                        <ul>
+                            <li><strong>21,465 images</strong> with six precisely annotated cardiac keypoints each</li>
+                            <li>Standardized <strong>lateral radiographs only</strong> for consistent VHS measurement
+                            </li>
+                            <!-- <li>Comprehensive metadata including breed, weight, and clinical status</li> -->
+                            <li>Multiple export formats (JSON, CSV, .mat) for flexibility</li>
+                        </ul>
+
+
+                    </div>
+
+                    <a href="https://huggingface.co/datasets/gen-ai-researcher/vhs_dogheart_db" target="_blank"
+                        class="btn btn-primary mt-3">
+                        <i class="fas fa-download me-1"></i> Download Dataset
+                    </a>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="feature-box h-2">
+                        <h6 class="mt-6">CCK Dataset Sample Images</h6>
+                        <img src="assets/resources/imgs/dspreview.png" alt="CCK Dataset Sample Images"
+                            class="img-fluid rounded mb-3">
+                        <div class="text-center">
+                            <p class="small text-muted">Sample radiographs from the CCK dataset with Annotations</p>
+                        </div>
+
+                        <h6 class="mt-5">Dataset Distribution</h6>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Split</th>
+                                        <th>Number of Images</th>
+                                        <th>Percentage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Training</td>
+                                        <td>15,026</td>
+                                        <td>70%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Validation</td>
+                                        <td>2,155</td>
+                                        <td>10%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Testing</td>
+                                        <td>4,275</td>
+                                        <td>20%</td>
+                                    </tr>
+                                    <tr class="table-secondary fw-bold">
+                                        <td>Total</td>
+                                        <td>21,465</td>
+                                        <td>100%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Video Section -->
+    <!-- Video Demo Section -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <h2 class="section-title text-left">VHSMarker Annotation Tool</h2>
+            <p class="lead">A specialized web-based platform for precise canine cardiac analysis, combining clinical
+                expertise with advanced computer vision capabilities.</p>
+
+            <div class="feature-box">
+                <!-- Tech Stack -->
+                <div class="mb-4">
+                    <h4><i class="fas fa-layer-group text-primary me-2"></i>Technical Architecture</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="fa-ul">
+                                <li><span class="fa-li"><i
+                                            class="fas fa-server text-info"></i></span><strong>Backend:</strong> Flask
+                                    (Python) with OpenCV for image processing</li>
+                                <li><span class="fa-li"><i
+                                            class="fas fa-window-maximize text-info"></i></span><strong>Frontend:</strong>
+                                    HTML5 Canvas + JavaScript for responsive annotation</li>
+                                <li><span class="fa-li"><i
+                                            class="fas fa-network-wired text-info"></i></span><strong>Real-time
+                                        API:</strong> Real-Time communication for instant VHS calculation</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="fa-ul">
+                                <!-- <li><span class="fa-li"><i class="fas fa-database text-info"></i></span><strong>Data
+                                        Pipeline:</strong> DICOM/JPEG support with EXIF metadata extraction</li> -->
+                                <li><span class="fa-li"><i class="fas fa-cogs text-info"></i></span><strong>ML
+                                        Integration:</strong> ONNX runtime for model inference</li>
+                                <li><span class="fa-li"><i
+                                            class="fas fa-history text-info"></i></span><strong>Versioning:</strong>
+                                    Git-like annotation history tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Core Features -->
+                <p class="lead mb-4">
+                    VHSMarker revolutionizes canine cardiac analysis through three core innovations: <strong>Smart
+                        Annotation</strong> enables precise labeling of six anatomical keypoints (cardiac apex, tracheal
+                    bifurcation, and vertebral reference points) with pixel-level accuracy; <strong>Real-Time
+                        Analysis</strong> instantly computes the Vertebral Heart Score using the formula
+                    <code>VHS = 6 × (AB + CD)/EF</code>, where AB is the long axis (cardiac apex to tracheal
+                    bifurcation), CD is the short axis (perpendicular width), and EF is the vertebral reference length;
+                    <!-- and <strong>Clinical Workflow</strong> integration featuring DICOM metadata processing and secure
+                    data export.  -->
+                    The tool's hybrid web architecture combines Flask backend processing with HTML5 Canvas frontend interactivity, delivering 10-12 second annotation times while maintaining sub-pixel precision in measurements.
+                </p>
+                <!-- Video Demo -->
+                <h4 class="mt-4"><i class="fas fa-play-circle text-danger me-2"></i>Tool Demonstration</h4>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10"> <!-- Increased width for better visibility -->
+                        <div class="ratio ratio-16x9 video-container shadow-lg rounded overflow-hidden">
+                            <video controls>
+                                <source src="assets/VHS.mp4" type="video/mp4">
+                                Your browser does not support HTML5 video.
+                            </video>
+                        </div>
+                        <p class="text-muted small mt-2">Demonstrating: Keypoint placement (A-F), real-time VHS
+                            calculation, and model prediction comparison</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- MambaVHS Model Section-->
+    <section>
+        <div class="container">
+            <h2 class="section-title text-left">MambaVHS Model</h2>
+            <p>The MambaVHS model is a hybrid architecture that combines Mamba blocks for efficient long-range
+                sequence modeling with complementary convolutional components for precise spatial feature extraction.
+                This innovative design enables the model to achieve state-of-the-art accuracy in canine cardiac key
+                point detection and VHS estimation.</p>
+
+            <div class="feature-box">
+                <h4><i class="fas fa-check-circle text-success me-2"></i>Model Features</h4>
+                <ul>
+                    <li>State-of-the-art accuracy in canine cardiac analysis</li>
+                    <li>Efficient long-range modeling with Mamba blocks</li>
+                    <li>Real-time inference capabilities</li>
+                </ul>
+            </div>
+
+            <div class="text-center">
+                <img src="assets/resources/imgs/architecture.png" alt="MambaVHS Model Architecture"
+                    class="img-fluid rounded mb-3">
+                <p class="small text-muted">Figure : MambaVHS Model Architecture</p>
+            </div>
+            <!-- Mamba Stem -->
+            <div class="feature-box mb-4">
+                <h4 class="text-secondary">
+                    <i class="fas fa-seedling me-2"></i>Mamba Stem
+                </h4>
+                <p>
+                    The initial feature extractor uses two 3×3 convolutional layers with SiLU activation and stride-2
+                    downsampling.
+                    This reduces spatial dimensions while preserving critical cardiac boundaries, forming a robust
+                    foundation
+                    for subsequent processing stages.
+                </p>
+            </div>
+
+            <!-- Mamba Stage -->
+            <div class="feature-box mb-4">
+                <h4 class="text-secondary">
+                    <i class="fas fa-network-wired me-2"></i>Mamba Stage
+                </h4>
+                <p>
+                    Four progressive stages combine residual blocks for local feature extraction with Mamba state-space
+                    layers
+                    for efficient long-range modeling. This hybrid approach captures both detailed cardiac structures
+                    and their
+                    relationships across thoracic vertebrae.
+                </p>
+            </div>
+
+            <!-- SE Layer & Head -->
+            <div class="feature-box">
+                <h4 class="text-secondary">
+                    <i class="fas fa-bullseye me-2"></i>SE Layer & Regression Head
+                </h4>
+                <p>
+                    Squeeze-Excitation layers dynamically recalibrate channel-wise features, while the final regression
+                    head
+                    uses global average pooling and fully-connected layers to predict keypoints at 42ms
+                    inference speed.
+                </p>
+            </div>
+
+
+
+
+    </section>
+
+    <!-- Results Section -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <h2 class="section-title">Experimental Results</h2>
+
+            <!-- Performance Metrics -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <p>
+                        This section presents the experimental evaluation of the VHSMarker framework for vertebral heart
+                        score (VHS) estimation from canine thoracic radiographs. The primary evaluation metric is test
+                        accuracy, based on VHS classification into three clinically significant categories: normal heart
+                        size (VHS < 8.2), borderline cardiomegaly (8.2 <=VHS <=10), and severe cardiomegaly (VHS> 10).
+                            These thresholds provide a clear basis for assessing the presence and severity of
+                            cardiomegaly, which is critical for accurate veterinary diagnostics.
+                    </p>
+
+                    <div class="feature-box">
+                        <h5 class="text-secondary"><i class="fas fa-trophy me-2"></i>Quantitative Results</h5>
+                        <p>The comprehensive evaluation demonstrates significant improvements across all metrics:</p>
+
+                        <div class="row mt-3">
+                            <div class="col-md-5">
+                                <p><strong>Key findings:</strong>
+                                    Table 1 compares the performance of various state-of-the-art models on the Canine
+                                    Cardiac key point (CCK) Dataset. Notably, the proposed MambaVHS model achieves the
+                                    highest test accuracy of <strong>91.8%</strong>, demonstrating its effectiveness in
+                                    precise key point localization and VHS estimation. This performance surpasses
+                                    several well-established baselines, including ConvNeXt (89.4%), EfficientNetB7
+                                    (88.41%), and CDA (86.4%), highlighting the advantage of Mamba-based architectures
+                                    in capturing complex anatomical structures.
+                                </p>
+                            </div>
+                            <div class="col-md-7">
+                                <img src="assets/resources/imgs/accuracy_comparison.png" alt="Accuracy Comparison Chart"
+                                    class="img-fluid rounded border">
+                                <p class="small text-muted text-center mt-2">Table 1: Comparative accuracy across models
+                                    (MambaVHS vs baselines)</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full-width Prediction Visualizations -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="feature-box">
+                        <h5 class="text-secondary"><i class="fas fa-eye me-2"></i>Prediction Analysis</h5>
+                        <p>Visual comparisons from different models, including MambaVHS, ConvNeXt, EfficientNetB7, and
+                            CDA, on canine thoracic radiographs. MambaVHS consistently generates predictions closer to
+                            the actual VHS, particularly for less common cases with irregular thoracic structures and
+                            unusual imaging angles. This highlights its superior ability to capture long and short axes
+                            accurately, outperforming other models in challenging scenarios, making it a reliable choice
+                            for real-world veterinary diagnostics.</p>
+                        <p class="small text-secondary">* The ground truth is shown in <label
+                                style="color:red">Red</label>, while predictions are shown in <label
+                                style="color:yellow">Yellow</label></p>
+
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <h6 class="small text-center"><strong>VHS(<8.2) </strong>
+                                </h6>
+                                <img src="assets/resources/imgs/vhs_less_8_2.png" alt="Prediction Samples"
+                                    class="img-fluid rounded border mb-3">
+                                <hr />
+
+                                <h6 class="small text-center"><strong>VHS(>=8.2 and <=10) </strong>
+                                </h6>
+                                <img src="assets/resources/imgs/borderline.png" alt="Prediction Samples"
+                                    class="img-fluid rounded border mb-3">
+                                <hr />
+
+                                <h6 class="small text-center"><strong>VHS(>10) </strong></h6>
+                                <img src="assets/resources/imgs/vhs_grt_10.png" alt="Prediction Samples"
+                                    class="img-fluid rounded border mb-3">
+                                <hr />
+                            </div>
+
+                            <div class="col-md-12">
+                                <p class="mb-0">
+                                    The model demonstrates strong performance across challenging scenarios: it
+                                    accurately classifies borderline VHS values near clinical thresholds (8.2 and 10),
+                                    handles irregular anatomies including spinal deformities and thoracic abnormalities,
+                                    and processes images in 42ms (A100 GPU) for real-time clinical workflow integration.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ablation Study -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="feature-box">
+                        <h4 class="text-primary"><i class="fas fa-clipboard-check me-2"></i>Ablation Study</h4>
+                        <p>Systematic evaluation of architectural components reveals each element's contribution:</p>
+
+                        <div class="table-responsive mt-3">
+                            <table class="table table-bordered table-hover">
+                                <thead class="table-primary">
+                                    <tr>
+                                        <th>Model Variant</th>
+                                        <th class="text-center">Val Acc (%)</th>
+                                        <th class="text-center">Test Acc (%)</th>
+                                        <th>Performance Impact</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Without SE Layers</td>
+                                        <td class="text-center">88.0</td>
+                                        <td class="text-center">88.5</td>
+                                        <td>3.3% accuracy drop shows importance of channel attention</td>
+                                    </tr>
+                                    <tr>
+                                        <td>With L1 Loss Only</td>
+                                        <td class="text-center">88.4</td>
+                                        <td class="text-center">88.7</td>
+                                        <td>3.1% drop highlights VHSAwareLoss benefits</td>
+                                    </tr>
+                                    <tr>
+                                        <td>With Attention + MLP</td>
+                                        <td class="text-center">80.1</td>
+                                        <td class="text-center">84.7</td>
+                                        <td>7.1% gain from Mamba's selective scanning</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Without Residual Blocks</td>
+                                        <td class="text-center">82.0</td>
+                                        <td class="text-center">84.5</td>
+                                        <td>7.3% drop demonstrates need for skip connections</td>
+                                    </tr>
+                                    <tr class="table-success fw-bold">
+                                        <td>Full MambaVHS</td>
+                                        <td class="text-center">89.5</td>
+                                        <td class="text-center">91.8</td>
+                                        <td>Optimal configuration</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="small text-muted mt-2">Table 2: Complete ablation study with performance deltas</p>
+
+                        <p>
+                            The ablation study demonstrates the critical contributions of each architectural component,
+                            with the full MambaVHS model achieving 91.8% test accuracy. Removing SE layers reduced
+                            performance by 3.3%, while using only L1 loss decreased accuracy by 3.1%. Most
+                            significantly,
+                            replacing Mamba blocks with standard attention mechanisms resulted in a 7.1% performance
+                            drop,
+                            highlighting the importance of efficient sequence modeling. The complete architecture
+                            provides
+                            optimal balance between accuracy and computational efficiency.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusion Section -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <p class="lead text-center">
+                    The VHSMarker framework advances canine cardiac analysis through its efficient annotation tool
+                    (10-12s/image),
+                    comprehensive CCK dataset (21,465 images), and high-accuracy MambaVHS model (91.8% test accuracy,
+                    42ms inference),
+                    establishing a new benchmark for automated veterinary diagnostics.
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- Citation Section -->
+    <!-- <section class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center">Citation</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="feature-box">
+                        <p>If you use VHSMarker in your research, please cite:</p>
+                        <pre class="bg-light p-3 rounded">@article{vhsmarker2023,
+  title={VHSMarker: High-Precision Canine Cardiac Analysis},
+  author={Your Name and Collaborators},
+  journal={Journal of Veterinary AI},
+  year={2023},
+  publisher={Nature}
+}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Footer -->
+    <!-- <footer class="text-center">
+        <div class="container">
+            <div class="mb-3">
+                <a href="https://github.com/gen-ai-research/dog-vhs" target="_blank" class="text-white me-3">
+                    <i class="fab fa-github fa-2x"></i>
+                </a>
+                <a href="#" class="text-white me-3">
+                    <i class="fas fa-file-pdf fa-2x"></i>
+                </a>
+                <a href="#" class="text-white">
+                    <i class="fas fa-envelope fa-2x"></i>
+                </a>
+            </div>
+            <p class="mb-0">© 2023 VHSMarker Research Team. All rights reserved.</p>
+        </div>
+    </footer> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
