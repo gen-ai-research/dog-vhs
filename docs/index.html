@@ -7,6 +7,52 @@
     <title>VHSMarker: A High-Precision Annotation Tool for Canine Cardiac key point Detection and VHS Estimation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        .breed-box {
+            border: 1px solid #dee2e6;
+            border-radius: 0.5rem;
+            padding: 10px;
+            margin: 5px;
+            background-color: #f8f9fa;
+            text-align: center;
+            font-size: 0.95rem;
+            box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .table-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .breed-table {
+            border-collapse: collapse;
+            min-width: 250px;
+            max-width: 300px;
+        }
+
+        .breed-th,
+        .breed-td {
+            border: 1px solid #aaa;
+            padding: 5px 10px;
+            text-align: left;
+            font-size: 10px;
+        }
+
+        .breed-th {
+            background-color: #f0f0f0;
+        }
+
+        .breed-tr:nth-child(even) .breed-td {
+            background-color: #f9f9f9;
+        }
+        .breed-no {
+            font-weight: bold;
+            
+        }
+    </style>
+
     <style>
         :root {
             /* --primary-color: #872a09; */
@@ -279,28 +325,94 @@
                             <!-- <li>Comprehensive metadata including breed, weight, and clinical status</li> -->
                             <li>Multiple export formats (JSON, CSV, .mat) for flexibility</li>
                         </ul>
+                    </div>
+                    <div class="feature-box">
+                        <h5>Demographic Information</h5>
+                        <div class="row">
+                            <!-- Sex Distribution Table -->
+                            <div class="col-md-6">
+                                <table class="table table-bordered table-striped table-sm">
+                                    <caption><small>Table 1: Sex Distribution</small></caption>
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Sex</th>
+                                            <th>Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Female</td>
+                                            <td>7941</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Male</td>
+                                            <td>4395</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Unknown</td>
+                                            <td>49</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Age Group Distribution Table -->
+                            <div class="col-md-6">
+                                <table class="table table-bordered table-striped table-sm">
+                                    <caption><small>Table 2: Age Group Distribution</small></caption>
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Age Group (years)</th>
+                                            <th>Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>0 to 5</td>
+                                            <td>2961</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6 to 11</td>
+                                            <td>6272</td>
+                                        </tr>
+                                        <tr>
+                                            <td>12 to 17</td>
+                                            <td>2827</td>
+                                        </tr>
+                                        <tr>
+                                            <td>18 to 30</td>
+                                            <td>86</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Unknown</td>
+                                            <td>239</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
 
 
                     </div>
 
-                    <a href="https://huggingface.co/datasets/gen-ai-researcher/vhs_dogheart_db" target="_blank"
-                        class="btn btn-primary mt-3">
-                        <i class="fas fa-download me-1"></i> Download Dataset
-                    </a>
+
                 </div>
 
                 <div class="col-lg-6">
                     <div class="feature-box h-2">
-                        <h6 class="mt-6">CCK Dataset Sample Images</h6>
+                        <h6 class="mt-1">CCK Dataset Sample Images</h6>
                         <img src="assets/resources/imgs/dspreview.png" alt="CCK Dataset Sample Images"
                             class="img-fluid rounded mb-3">
                         <div class="text-center">
                             <p class="small text-muted">Sample radiographs from the CCK dataset with Annotations</p>
                         </div>
-
-                        <h6 class="mt-5">Dataset Distribution</h6>
+                    </div>
+                    <div class="feature-box h-2">
+                        
                         <div class="table-responsive">
                             <table class="table table-bordered">
+                                <caption><small>Table 3: Dataset Distribution</small></caption>
                                 <thead class="table-dark">
                                     <tr>
                                         <th>Split</th>
@@ -336,6 +448,205 @@
 
                 </div>
             </div>
+            <!-- Breed Information-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="feature-box">
+                        <h6>Breed Information</h6>
+                        <p class="lead">The CCK dataset includes a diverse range of breeds, ensuring comprehensive
+                            coverage
+                            of canine cardiac anatomy.</p>
+                        <div class="table-container">
+                            
+                            <!-- Start first table -->
+                            <table class="breed-table">
+                                <tr class="breed-tr"><th class="breed-th">#</th><th class="breed-th">Breed</th><th class="breed-th">Count</th></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">1</td><td class="breed-td"> Mixed Dog </td><td class="breed-td"> 1256 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">2</td><td class="breed-td"> Labrador Retriever </td><td class="breed-td"> 479 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">3</td><td class="breed-td"> Golden Retriever </td><td class="breed-td"> 191 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">4</td><td class="breed-td"> German Shepherd </td><td class="breed-td"> 164 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">5</td><td class="breed-td"> Chihuahua </td><td class="breed-td"> 100 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">6</td><td class="breed-td"> Boxer </td><td class="breed-td"> 79 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">7</td><td class="breed-td"> Shih Tzu </td><td class="breed-td"> 77 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">8</td><td class="breed-td"> Yorkshire Terrier </td><td class="breed-td"> 77 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">9</td><td class="breed-td"> French Bulldog </td><td class="breed-td"> 76 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">10</td><td class="breed-td"> English Bulldog </td><td class="breed-td"> 72 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">11</td><td class="breed-td"> Canine, Nos </td><td class="breed-td"> 67 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">12</td><td class="breed-td"> Miniature Poodle </td><td class="breed-td"> 62 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">13</td><td class="breed-td"> Siberian Husky </td><td class="breed-td"> 61 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">14</td><td class="breed-td"> Border Collie </td><td class="breed-td"> 57 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">15</td><td class="breed-td"> Beagle Hound </td><td class="breed-td"> 56 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">16</td><td class="breed-td"> Pomeranian </td><td class="breed-td"> 52 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">17</td><td class="breed-td"> Cavalier King Chas S… </td><td class="breed-td"> 51 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">18</td><td class="breed-td"> Pug </td><td class="breed-td"> 48 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">19</td><td class="breed-td"> Boston Terrier </td><td class="breed-td"> 44 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">20</td><td class="breed-td"> Jack Russell Terrier </td><td class="breed-td"> 44 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">21</td><td class="breed-td"> Maltese </td><td class="breed-td"> 44 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">22</td><td class="breed-td"> Australian Shepherd </td><td class="breed-td"> 42 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">23</td><td class="breed-td"> Shetland Sheepdog </td><td class="breed-td"> 42 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">24</td><td class="breed-td"> Rottweiler </td><td class="breed-td"> 41 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">25</td><td class="breed-td"> English Cocker Spani… </td><td class="breed-td"> 35 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">26</td><td class="breed-td"> Great Dane </td><td class="breed-td"> 34 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">27</td><td class="breed-td"> Bernese Mountain Dog </td><td class="breed-td"> 32 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">28</td><td class="breed-td"> Miniature Schnauzer </td><td class="breed-td"> 32 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">29</td><td class="breed-td"> Cock-A-Poo </td><td class="breed-td"> 31 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">30</td><td class="breed-td"> Irish Wolfhound </td><td class="breed-td"> 9 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">31</td><td class="breed-td"> Swiss Mountain Dog </td><td class="breed-td"> 4 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">32</td><td class="breed-td"> English Shepherd </td><td class="breed-td"> 4 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">33</td><td class="breed-td"> Nova Scotia Duck Tol… </td><td class="breed-td"> 4 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">34</td><td class="breed-td"> Saluki </td><td class="breed-td"> 4 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">35</td><td class="breed-td"> Italian Greyhound </td><td class="breed-td"> 4 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">36</td><td class="breed-td"> Flat-Coated Retriever </td><td class="breed-td"> 4 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">37</td><td class="breed-td"> Shiba Inu </td><td class="breed-td"> 4 </td></tr>
+
+
+
+                            </table>
+
+                            <!-- Start second table -->
+                            <table class="breed-table">
+                                <tr class="breed-tr"><th class="breed-th">#</th><th class="breed-th">Breed</th><th class="breed-th">Count</th></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">38</td><td class="breed-td">Smooth Minature Dach… </td><td class="breed-td"> 23 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">39</td><td class="breed-td"> English Setter </td><td class="breed-td"> 21 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">40</td><td class="breed-td"> Australian Cattle Dog </td><td class="breed-td"> 20 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">41</td><td class="breed-td"> Toy Poodle </td><td class="breed-td"> 20 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">42</td><td class="breed-td"> Chinese Sharpei </td><td class="breed-td"> 20 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">43</td><td class="breed-td"> Bichon Frise </td><td class="breed-td"> 19 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">44</td><td class="breed-td"> American Bulldog </td><td class="breed-td"> 18 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">45</td><td class="breed-td"> Pembroke Welsh Corgi </td><td class="breed-td"> 18 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">46</td><td class="breed-td"> West Highland Terrier </td><td class="breed-td"> 18 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">47</td><td class="breed-td"> Rhodesian Ridgeback </td><td class="breed-td"> 18 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">48</td><td class="breed-td"> English Springer Spa… </td><td class="breed-td"> 17 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">49</td><td class="breed-td"> American Staffordshi… </td><td class="breed-td"> 17 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">50</td><td class="breed-td"> Miniature Pinscher </td><td class="breed-td"> 16 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">51</td><td class="breed-td"> Brittany Spaniel </td><td class="breed-td"> 16 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">52</td><td class="breed-td"> Long-Haired Std Dach… </td><td class="breed-td"> 14 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">53</td><td class="breed-td"> German Short-Haired … </td><td class="breed-td"> 14 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">54</td><td class="breed-td"> Terrier, Nos </td><td class="breed-td"> 14 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">55</td><td class="breed-td"> Basset Hound </td><td class="breed-td"> 13 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">56</td><td class="breed-td"> Newfoundland </td><td class="breed-td"> 13 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">57</td><td class="breed-td"> Bull Mastiff </td><td class="breed-td"> 12 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">58</td><td class="breed-td"> Long-Haired Mini Dac… </td><td class="breed-td"> 12 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">59</td><td class="breed-td"> Bulldog, Nos </td><td class="breed-td"> 12 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">60</td><td class="breed-td"> Belgian Malinois </td><td class="breed-td"> 12 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">61</td><td class="breed-td"> Lhasa Apso </td><td class="breed-td"> 11 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">62</td><td class="breed-td"> Greyhound </td><td class="breed-td"> 11 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">63</td><td class="breed-td"> Bull Terrier </td><td class="breed-td"> 10 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">64</td><td class="breed-td"> Irish Setter </td><td class="breed-td"> 10 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">65</td><td class="breed-td"> Catahula Leopard Dog </td><td class="breed-td"> 9 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">66</td><td class="breed-td"> Saint Bernard </td><td class="breed-td"> 9 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">67</td><td class="breed-td"> Treeing Walker Coonh… </td><td class="breed-td"> 4 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">68</td> <td class="breed-td">Bloodhound </td><td class="breed-td"> 3 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">69</td> <td class="breed-td">Chinese Crested </td><td class="breed-td"> 3 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">70</td><td class="breed-td"> American Foxhound </td><td class="breed-td"> 3 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">71</td><td class="breed-td"> Tibetan Terrier </td><td class="breed-td"> 3 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">72</td><td class="breed-td"> Neapolitan Mastiff </td><td class="breed-td"> 3 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">73</td> <td class="breed-td">Australian Heeler </td><td class="breed-td"> 2 </td></tr>
+                            </table>
+
+                            <!-- Start third table -->
+                            <table class="breed-table">
+                                <tr class="breed-tr"><th class="breed-th">#</th><th class="breed-th">Breed</th><th class="breed-th">Count</th></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">74</td><td class="breed-td">Red Bone Hound </td><td class="breed-td">8 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">75</td><td class="breed-td">Samoyed </td><td class="breed-td">7 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">76</td><td class="breed-td">Chesapeake Bay Retri… </td><td class="breed-td">7 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">77</td><td class="breed-td">Vizsla </td><td class="breed-td">7 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">78</td><td class="breed-td">Smooth Standard Dach… </td><td class="breed-td">7 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">79</td><td class="breed-td">American Pit Bull Te… </td><td class="breed-td">7 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">80</td><td class="breed-td">Whippet </td><td class="breed-td">7 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">81</td><td class="breed-td">Akita </td><td class="breed-td">6 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">82</td><td class="breed-td">Leonberger </td><td class="breed-td">6 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">83</td><td class="breed-td">Schipperke </td><td class="breed-td">6 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">84</td><td class="breed-td">American Eskimo Dog </td><td class="breed-td">6 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">85</td><td class="breed-td">Mexican Hairless </td><td class="breed-td">6 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">86</td><td class="breed-td">Coonhound </td><td class="breed-td">5 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">87</td><td class="breed-td">English Mastiff </td><td class="breed-td">5 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">88</td><td class="breed-td">Silky Terrier </td><td class="breed-td">5 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">89</td><td class="breed-td">German Wire-Haired P… </td><td class="breed-td">5 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">90</td><td class="breed-td">Weimaraner </td><td class="breed-td">5 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">91</td><td class="breed-td">Papillon </td><td class="breed-td">5 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">92</td><td class="breed-td">Scottish Terrier </td><td class="breed-td">5 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">93</td><td class="breed-td">Staffordshire Bull T… </td><td class="breed-td">5 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">94</td><td class="breed-td">Mastiff, Nos </td><td class="breed-td">5 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">95</td><td class="breed-td">Hound, Nos </td><td class="breed-td">5 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">96</td><td class="breed-td">Keeshond </td><td class="breed-td">5 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">97</td><td class="breed-td">Giant Schnauzer </td><td class="breed-td">4 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">98</td><td class="breed-td">Airedale Terrier </td><td class="breed-td">4 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">99</td><td class="breed-td">Coton De Tulear </td><td class="breed-td">4 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">100</td><td class="breed-td">Cocker Spaniel, Nos </td><td class="breed-td">9 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">101</td><td class="breed-td">Cairn Terrier </td><td class="breed-td">9 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">102</td><td class="breed-td">Rat Terrier </td><td class="breed-td">9 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">103</td><td class="breed-td">Spinone Italiano </td><td class="breed-td">2 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">104</td><td class="breed-td">Briard </td><td class="breed-td">2 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">105</td><td class="breed-td">Old English Sheepdog </td><td class="breed-td">2 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">106</td><td class="breed-td">Borzoi </td><td class="breed-td">2 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">107</td><td class="breed-td">Alaskan Malamute </td><td class="breed-td">2 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">108</td><td class="breed-td">Norwegian Elkhound </td><td class="breed-td">2 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">109</td><td class="breed-td">German Long-Haired P… </td><td class="breed-td">2 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">110</td><td class="breed-td">Affenpinscher </td><td class="breed-td">2 </td></tr>
+
+
+                            </table>
+
+                            <!-- Start fourth table -->
+                            <table class="breed-table">
+                                <tr class="breed-tr"><th class="breed-th">#</th><th class="breed-th">Breed</th><th class="breed-th">Count</th></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">111</td><td class="breed-td">Toy Manchester Terri… </td><td class="breed-td">2 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">112</td><td class="breed-td">Clumber Spaniel </td><td class="breed-td">2 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">113</td><td class="breed-td">Standard Schnauzer </td><td class="breed-td">2 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">114</td><td class="breed-td">Irish Water Spaniel </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">115</td><td class="breed-td">Shiloh Shepherd </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">116</td><td class="breed-td">Cardigan Welsh Corgi </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">117</td><td class="breed-td">American Bully </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">118</td><td class="breed-td">Japanese Chin </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">119</td><td class="breed-td">English Coonhound </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">120</td><td class="breed-td">Border Terrier </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">121</td><td class="breed-td">Setter, Nos </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">122</td><td class="breed-td">Tibetan Spaniel </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">123</td><td class="breed-td">American Cocker Span… </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">124</td><td class="breed-td">Australian Terrier </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">125</td><td class="breed-td">Welsh Terrier </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">126</td><td class="breed-td">Norfolk Terrier </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">127</td><td class="breed-td">Dalmatian </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">128</td><td class="breed-td">Pharaoh Hound </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">129</td><td class="breed-td">Springer Spaniel </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">130</td><td class="breed-td">Silken Windsprite </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">131</td><td class="breed-td">Wirehaired Standard … </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">132</td><td class="breed-td">Retriever, Nos </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">133</td><td class="breed-td">Soft-Coated Wheaten … </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">134</td><td class="breed-td">Maremma Sheepdog </td><td class="breed-td">1 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">136</td><td class="breed-td">Standard Poodle </td><td class="breed-td">31 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">137</td><td class="breed-td">Havanese </td><td class="breed-td">30 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">138</td><td class="breed-td">Dachshund, Nos </td><td class="breed-td">28 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">139</td><td class="breed-td">Collie, Nos </td><td class="breed-td">9 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">140</td><td class="breed-td">Peke-A-Poo </td><td class="breed-td">2 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">141</td><td class="breed-td">Anatolian Shepherd </td><td class="breed-td">2 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">142</td><td class="breed-td">Wirehaired Pointing … </td><td class="breed-td">2 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">143</td><td class="breed-td">Doberman Pinscher </td><td class="breed-td">26 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">144</td><td class="breed-td">Labradoodle </td><td class="breed-td">26 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">145</td><td class="breed-td">Great Pyrenees </td><td class="breed-td">24 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">146</td><td class="breed-td">Cane Corso </td><td class="breed-td">8 </td></tr>
+                                <tr class="breed-tr"><td class="breed-td breed-no">135</td><td class="breed-td">Unknown </td><td class="breed-td">8039 </td></tr>
+                            </table>
+
+                            <caption><small>Table 4: Breed-wise distribution of annotated canine X-ray images in the CCK dataset, detailing the number of samples per breed for demographic and diversity analysis.</small></caption>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="https://huggingface.co/datasets/gen-ai-researcher/vhs_dogheart_db" target="_blank"
+                        class="btn btn-primary mt-3">
+                        <i class="fas fa-download me-1"></i> Download Dataset
+                    </a>
+
+                </div>
+            </div>
+        </div>
         </div>
     </section>
 
@@ -389,7 +700,9 @@
                     bifurcation), CD is the short axis (perpendicular width), and EF is the vertebral reference length;
                     <!-- and <strong>Clinical Workflow</strong> integration featuring DICOM metadata processing and secure
                     data export.  -->
-                    The tool's hybrid web architecture combines Flask backend processing with HTML5 Canvas frontend interactivity, delivering 10-12 second annotation times while maintaining sub-pixel precision in measurements.
+                    The tool's hybrid web architecture combines Flask backend processing with HTML5 Canvas frontend
+                    interactivity, delivering 10-12 second annotation times while maintaining sub-pixel precision in
+                    measurements.
                 </p>
                 <!-- Video Demo -->
                 <h4 class="mt-4"><i class="fas fa-play-circle text-danger me-2"></i>Tool Demonstration</h4>
@@ -501,7 +814,7 @@
                         <div class="row mt-3">
                             <div class="col-md-5">
                                 <p><strong>Key findings:</strong>
-                                    Table 1 compares the performance of various state-of-the-art models on the Canine
+                                    Table 5 compares the performance of various state-of-the-art models on the Canine
                                     Cardiac key point (CCK) Dataset. Notably, the proposed MambaVHS model achieves the
                                     highest test accuracy of <strong>91.8%</strong>, demonstrating its effectiveness in
                                     precise key point localization and VHS estimation. This performance surpasses
@@ -513,8 +826,8 @@
                             <div class="col-md-7">
                                 <img src="assets/resources/imgs/accuracy_comparison.png" alt="Accuracy Comparison Chart"
                                     class="img-fluid rounded border">
-                                <p class="small text-muted text-center mt-2">Table 1: Comparative accuracy across models
-                                    (MambaVHS vs baselines)</p>
+                                <p><caption><small>Table 5: Comparative accuracy across models
+                                    (MambaVHS vs baselines)</small></caption></p>
                             </div>
                         </div>
 
@@ -622,7 +935,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <p class="small text-muted mt-2">Table 2: Complete ablation study with performance deltas</p>
+                        <p class="small text-muted mt-2">Table 6: Complete ablation study with performance deltas</p>
 
                         <p>
                             The ablation study demonstrates the critical contributions of each architectural component,
