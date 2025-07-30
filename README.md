@@ -1,6 +1,6 @@
 # VHSMarker: A High-Precision Annotation Tool for Canine Cardiac Keypoint Detection and VHS Estimation
 
-🔗 Website: [https://gen-ai-research.github.io/dog-vhs/](https://gen-ai-research.github.io/dog-vhs/)
+🔗 Github Website URL : [https://gen-ai-research.github.io/dog-vhs/](https://gen-ai-research.github.io/dog-vhs/)
 
 ![VHSMarker UI](docs/assets/resources/imgs/Main%20Screen.png)
 
